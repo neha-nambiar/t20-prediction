@@ -1,0 +1,35 @@
+toss_decision = {val: i for i, val in enumerate(match_data['toss decision'].unique())}
+lighting = {val: i for i, val in enumerate(match_data['lighting'].unique())}
+series_name = {val: i for i, val in enumerate(match_data['series_name'].unique())}
+venue = {val: i for i, val in enumerate(match_data['venue'].unique())}
+union_team = set(list(match_data['team1'])).union(set(list(match_data['team2'])))
+team_id = {val: i for i, val in enumerate(union_team)}
+season = {val: i for i, val in enumerate(match_data['season'].unique())}
+ground_id = {val: i for i, val in enumerate(match_data['ground_id'].unique())}
+a = set([item for sublist in match_data['team1_roster_ids'] for item in sublist])
+b = set([item for sublist in match_data['team2_roster_ids'] for item in sublist])
+all_players = a.union(b)
+player_id = {val: i for i, val in enumerate(all_players)}
+by = {val: i for i, val in enumerate(match_data['by'].unique())}
+series_type = {val: i for i, val in enumerate(match_data['series_type'].unique())}
+wicket_kind = {val: i for i, val in enumerate(batsman['wicket kind'].unique())}
+city = {val: i for i, val in enumerate(match_data['city'].unique())}
+u1 = set(list(match_data['umpire1']))
+u2 = set(list(match_data['umpire2']))
+umpire_id = {val: i for i, val in enumerate(u1.union(u2))}
+
+# Label encoding all categorical columns
+match_data['toss decision'] = match_data['toss decision'].map(toss_decision)
+match_data['lighting'] = match_data['lighting'].map(lighting)
+match_data['series_name'] = match_data['series_name'].map(series_name)
+match_data['venue'] = match_data['venue'].map(venue)
+match_data['team1'] = match_data['team1'].map(team_id)
+match_data['team2'] = match_data['team2'].map(team_id)
+match_data['season'] = match_data['season'].map(season)
+match_data['ground_id'] = match_data['ground_id'].map(ground_id)
+match_data['by'] = match_data['by'].map(by)
+match_data['series_type'] = match_data['series_type'].map(series_type)
+match_data['player_of_the_match_id'] = match_data['player_of_the_match_id'].map(player_id)
+match_data['city'] = match_data['city'].map(city)
+match_data['umpire1'] = match_data['umpire1'].map(umpire_id)
+match_data['umpire2'] = match_data['umpire2'].map(umpire_id)
